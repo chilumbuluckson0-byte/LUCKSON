@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Hire Website</title>
+  <link rel="stylesheet" href="style.css">
+
+   <style>
+    .car-details {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .main-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .thumbnail-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .thumbnail-gallery img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .thumbnail-gallery img:hover {
+      transform: scale(1.1);
+    }
+    .features {
+      text-align: left;
+      margin-top: 20px;
+    }
+    .features ul {
+      list-style: none;
+      padding: 0;
+    }
+    .features li {
+      background: #f8f8f8;
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .book-btn {
+      background: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+    <div class="logo">RedWheel Rentals</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="signupLink"><a href="signup.html">Sign Up</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to RedWheel Rentals</h1>
+    <p>Find your perfect ride today!</p>
+  
+  </section>
+
+  <section id="cars" class="car-section">
+    <h2>Available Cars</h2>
+    <div class="car-list">
+      <div class="car-card">
+        <img src="image/toyota corola.jpg" alt="Toyota Corolla" />
+        <h3>Toyota Corolla</h3>
+        <p>$50/day</p>
+        <button>Book Now</button>
+      </div>
+      <div class="car-list">
+  <div class="car-card">
+    <img src="image/toyota corola.jpg" alt="Toyota Corolla" />
+    <h3>Toyota Corolla</h3>
+    <p>$50/day</p>
+    <button onclick="bookCar('Toyota Corolla')">Book Now</button>
+  </div>
+
+  <div class="car-card">
+    <img src="image/blue civc.jpg" alt="Honda Civic" />
+    <h3>Honda Civic</h3>
+    <p>$60/day</p>
+    <button onclick="bookCar('Honda Civic')">Book Now</button>
+  </div>
+
+  <div class="car-card">
+    <img src="image/x5.jpg" alt="BMW" />
+    <h3>BMW X5</h3>
+    <p>$120/day</p>
+    <button onclick="bookCar('BMW X5')">Book Now</button>
+    
+  </div>
+</div>
+
+      
+    </div>
+  </section>
+    </section>
+    
+  <section class="car-details">
+    <h1 id="carName">SPECIAL OFFER</h1>
+    <img id="mainImage" src="image/1755070977674.jpg" alt="Car" class="main-image">
+
+    <div class="thumbnail-gallery">
+      <img src="image/1755070981010.jpg" onclick="changeImage(this)">
+      <img src="image/1755070996213.jpg" onclick="changeImage(this)">
+      <img src="image/1755071003275.jpg" onclick="changeImage(this)">
+    </div>
+
+
+  <footer>
+    <p>&copy; 2025 RedWheel Rentals. All rights reserved.</p>
+  </footer>
+
+  
+
+  <script src="script.js"></script>
+  <script>
+    function changeImage(imgElement) {
+      document.getElementById("mainImage").src = imgElement.src;
+    }
+  </script>
+</body>
+</html>

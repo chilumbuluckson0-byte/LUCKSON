@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - RedWheel Rental</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* Services 3D Cards */
+    .services-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .services-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6600;
+    }
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .service-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      perspective: 1000px;
+    }
+    .service-card:hover {
+      transform: translateY(-10px) scale(1.05) rotateX(5deg) rotateY(-5deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+    .service-card img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .service-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RedWheel Rental</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="signupLink"><a href="signup.html">Sign Up</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <section class="services-section">
+      <h1>Our Services</h1>
+      <p>At RedWheel Rental, we provide premium car hire services with flexible options for all your travel needs.</p>
+
+      <div class="services-container">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <img src="image/dailyrent.jpg" alt="Daily Rental">
+          <h3>Daily Rentals</h3>
+          <p>Hire a car for a day or two at affordable rates. Perfect for city errands or short trips.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+          <img src="image/Chauffeur Service.jpg" alt="Chauffeur Service">
+          <h3>Chauffeur Service</h3>
+          <p>Enjoy the comfort of being driven by a professional chauffeur. Ideal for business or luxury rides.</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+          <img src="image/lugixury cars.jpg" alt="Luxury Cars">
+          <h3>Luxury Cars</h3>
+          <p>Arrive in style with our collection of premium cars for weddings, events, and VIP travel.</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card">
+          <img src="image/Long-Term Rentals.jpg" alt="Long Term Rental">
+          <h3>Long-Term Rentals</h3>
+          <p>Flexible monthly plans for long stays. Get the best rates for extended rentals.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RedWheel Rental. All rights reserved.</p>
+  </footer>
+</body>
+</html>

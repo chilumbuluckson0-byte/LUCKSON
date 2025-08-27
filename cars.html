@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedWheel Rental - Cars</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: #222;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: rgb(240, 20, 12);
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    nav a.active {
+      color:rgb(240, 20, 12);
+      font-weight: bold;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .car-list {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .car-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .car-card:hover {
+      transform: scale(1.05);
+    }
+
+    .car-card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    button {
+      background:rgb(240, 20, 12);
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #ff6600;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      overflow: auto;
+    }
+
+    .modal-content {
+      background: #fff;
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 450px;
+      text-align: left;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .gallery img {
+      width: 100px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .gallery img:hover {
+      border: 2px solid orange;
+    }
+
+    .main-pic {
+      width: 100%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RedWheel Rental</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cars.html" class="active">Cars</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Choose Your Ride</h2>
+    <div class="car-list">
+      <!-- Car 1 -->
+      <div class="car-card">
+        <img src="image/corolla1.jpg" alt="Sedan">
+        <h3>Toyota Corolla</h3>
+        <p>💰 $45/day</p>
+        <button onclick="viewDetails('Toyota Corolla')">View Details</button>
+        <button onclick="openBooking('Toyota Corolla')">Book Now</button>
+      </div>
+
+      <!-- Car 2 -->
+      <div class="car-card">
+        <img src="image/extrail1.jpg" alt="SUV">
+        <h3>Nissan X-Trail</h3>
+        <p>💰 $70/day</p>
+        <button onclick="viewDetails('Nissan X-Trail')">View Details</button>
+        <button onclick="openBooking('Nissan X-Trail')">Book Now</button>
+      </div>
+
+      <!-- Car 3 -->
+      <div class="car-card">
+        <img src="image/c-class1.jpg" alt="Luxury Car">
+        <h3>Mercedes C-Class</h3>
+        <p>💰 $120/day</p>
+        <button onclick="viewDetails('Mercedes C-Class')">View Details</button>
+        <button onclick="openBooking('Mercedes C-Class')">Book Now</button>
+      </div>
+
+      <!-- Car 4 -->
+      <div class="car-card">
+        <img src="image/vw1.jpg" alt="Hatchback">
+        <h3>Volkswagen Golf</h3>
+        <p>💰 $50/day</p>
+        <button onclick="viewDetails('Volkswagen Golf')">View Details</button>
+        <button onclick="openBooking('Volkswagen Golf')">Book Now</button>
+      </div>
+
+      <!-- Car 5 -->
+      <div class="car-card">
+        <img src="image/hilux1.jpg" alt="Pickup">
+        <h3>Toyota Hilux</h3>
+        <p>💰 $80/day</p>
+        <button onclick="viewDetails('Toyota Hilux')">View Details</button>
+        <button onclick="openBooking('Toyota Hilux')">Book Now</button>
+      </div>
+
+      <!-- Car 6 -->
+      <div class="car-card">
+        <img src="image/ford bus.jpg" alt="Van">
+        <h3>Ford Transit</h3>
+        <p>💰 $95/day</p>
+        <button onclick="viewDetails('Ford Transit')">View Details</button>
+        <button onclick="openBooking('Ford Transit')">Book Now</button>
+      </div>
+
+      <!-- Car 7 -->
+      <div class="car-card">
+        <img src="image/pourch1.jpg" alt="Sports Car">
+        <h3>Porsche 911</h3>
+        <p>💰 $250/day</p>
+        <button onclick="viewDetails('Porsche 911')">View Details</button>
+        <button onclick="openBooking('Porsche 911')">Book Now</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeBooking()">&times;</span>
+      <h2>Book Your Car</h2>
+      <form id="bookingForm">
+        <label>Car Selected</label>
+        <input type="text" id="carName" readonly>
+
+        <label>Full Name</label>
+        <input type="text" required>
+
+        <label>Email</label>
+        <input type="email" required>
+
+        <label>Phone Number</label>
+        <input type="tel" required>
+
+        <label>Pickup Date</label>
+        <input type="date" required>
+
+        <label>Return Date</label>
+        <input type="date" required>
+
+        <label>Special Requests</label>
+        <textarea placeholder="Child seat, GPS, airport pickup..."></textarea>
+
+        <button type="submit">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Details Modal -->
+  <div id="detailsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeDetails()">&times;</span>
+      <h2 id="detailsTitle"></h2>
+      <img id="mainImage" class="main-pic" src="" alt="">
+      <div id="gallery" class="gallery"></div>
+      <p id="detailsSpecs"></p>
+    </div>
+  </div>
+
+  <script>
+    // Car Data
+    const cars = {
+      "Toyota Corolla": {
+        images: ["image/corolla2.jpg", "image/corolla3.jpg"],
+        specs: "Automatic, Air Conditioning, 5 Seats, Petrol, Bluetooth, USB Charging"
+      },
+      "Nissan X-Trail": {
+        images: ["image/extrail2.jpg", "image/extrail3.jpg"],
+        specs: "Automatic, 4x4 Drive, 7 Seats, Diesel, Roof Rack, Parking Sensors"
+      },
+      "Mercedes C-Class": {
+        images: ["image/c-class2.jpg", "image/c-class3.jpg"],
+        specs: "Automatic, Leather Seats, Luxury Interior, Petrol, GPS, Sunroof"
+      },
+      "Volkswagen Golf": {
+        images: ["image/vw2.jpg","image/vw3.jpg","image/vw4.jpg"],
+        specs: "Manual, Compact Size, 5 Seats, Petrol, Fuel Efficient"
+      },
+      "Toyota Hilux": {
+        images: ["image/hilux2.jpg","image/hilux3.jpg"],
+        specs: "Automatic, 4x4 Drive, Double Cab, Diesel, Tow Bar"
+      },
+      "Ford Transit": {
+        images: ["image/ford bus1.jpg","image/ford bus2.jpg"],
+        specs: "Manual, 12 Seats, Diesel, Large Luggage Space"
+      },
+      "Porsche 911": {
+        images: ["image/pourch2.jpg","image/pourch3.jpg","image/pourch4.jpg"],
+        specs: "Automatic, 2 Seats, Sports Performance, Petrol, Premium Audio"
+      }
+    };
+
+    // Booking
+    function openBooking(carName) {
+      const loggedInUser = localStorage.getItem("user");
+      if (!loggedInUser) {
+        alert("⚠️ Please log in to book a car.");
+        window.location.href = "login.html";
+        return;
+      }
+      document.getElementById("bookingModal").style.display = "block";
+      document.getElementById("carName").value = carName;
+    }
+
+    function closeBooking() {
+      document.getElementById("bookingModal").style.display = "none";
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const loggedInUser = JSON.parse(localStorage.getItem("user"));
+      alert("✅ Booking confirmed! Thank you " + this.querySelector("input[type='text']").value);
+      closeBooking();
+    });
+
+    // Details
+    function viewDetails(carName) {
+      const car = cars[carName];
+      document.getElementById("detailsTitle").textContent = carName;
+      document.getElementById("mainImage").src = car.images[0];
+      document.getElementById("detailsSpecs").textContent = car.specs;
+
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+      car.images.forEach(img => {
+        const thumb = document.createElement("img");
+        thumb.src = img;
+        thumb.onclick = () => document.getElementById("mainImage").src = img;
+        gallery.appendChild(thumb);
+      });
+
+      document.getElementById("detailsModal").style.display = "block";
+    }
+
+    function closeDetails() {
+      document.getElementById("detailsModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>

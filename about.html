@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - RedWheel Rental</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* About Page Styling */
+    .about-hero {
+      background: url('image/redwheel logo.jpg') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .about-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    .about-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    .about-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .about-section h2 {
+      font-size: 2rem;
+      color: #ff6600;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .about-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+    .about-card:hover {
+      transform: translateY(-10px);
+    }
+    .about-card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .timeline {
+      margin-top: 50px;
+      padding: 20px;
+    }
+    .timeline-item {
+      background: #f7f7f7;
+      padding: 20px;
+      border-left: 4px solid #ff6600;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .timeline-item:hover {
+      transform: scale(1.02);
+    }
+    .timeline-item h4 {
+      margin-bottom: 8px;
+      color: #ff6600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RedWheel Rental</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="signupLink"><a href="signup.html">Sign Up</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="about-hero">
+      <h1>About RedWheel Rental</h1>
+      <p>Your trusted car rental partner, delivering reliable, affordable, and premium rides since day one.</p>
+    </section>
+
+    <!-- Mission, Vision, Values -->
+    <section class="about-section">
+      <h2>Who We Are</h2>
+      <div class="about-content">
+        <div class="about-card">
+          <h3>Our Mission</h3>
+          <p>To provide affordable and reliable car rental services, ensuring comfort and convenience for all our customers.</p>
+        </div>
+        <div class="about-card">
+          <h3>Our Vision</h3>
+          <p>To become the leading car rental company in Africa by combining technology, luxury, and customer care.</p>
+        </div>
+        <div class="about-card">
+          <h3>Our Values</h3>
+          <p>We stand for integrity, customer satisfaction, innovation, and safety in every service we deliver.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="about-section">
+      <h2>Our Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>2020 - Founded</h4>
+          <p>RedWheel Rental was born with the goal of making car rentals more accessible and affordable.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>2022 - Fleet Expansion</h4>
+          <p>We introduced luxury and premium vehicles to cater to weddings, corporate, and VIP clients.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>2024 - Tech Upgrade</h4>
+          <p>Our website and booking system went live, making it easier than ever for customers to hire cars online.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RedWheel Rental. All rights reserved.</p>
+  </footer>
+</body>
+</html>

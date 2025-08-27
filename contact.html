@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - RedWheel Rental</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #e63946;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-wegitight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: #ffcc00;
+    }
+
+    main.page-content {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .contact-section h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #e63946;
+    }
+
+    .contact-section p {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .contact-form, .contact-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 1 1 400px;
+      min-width: 300px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: bold;
+    }
+
+    .contact-form input, 
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background: #e63946;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .contact-form button:hover {
+      background: #d62839;
+    }
+
+    .contact-info h2, .contact-info h3 {
+      margin-bottom: 0.5rem;
+      color: #e63946;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.8rem;
+    }
+
+    .map-placeholder {
+      background: #ddd;
+      margin-top: 2rem;
+      height: 300px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #666;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RedWheel Rental</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="signupLink"><a href="signup.html">Sign Up</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <section class="contact-section">
+      <h1>Contact Us</h1>
+      <p>We’d love to hear from you! Get in touch using the form below or through our contact details.</p>
+
+      <div class="contact-container">
+        <!-- Contact Form -->
+        <form class="contact-form">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <!-- Company Info -->
+        <div class="contact-info">
+          <h2>Our Office</h2>
+          <p><strong>RedWheel Rental</strong></p>
+          <p>123 Freedom Street, Lusaka, Zambia</p>
+          <p>Email: <a href="mailto:support@redwheel.com">support@redwheel.com</a></p>
+          <p>Phone: +260 900 123 456</p>
+
+          <h3>Working Hours</h3>
+          <p>Mon - Sat: 8:00 AM – 6:00 PM</p>
+          <p>Sun: Closed</p>
+        </div>
+      </div>
+
+      <!-- Placeholder for Google Map -->
+      <div class="map-placeholder">
+        <p>[My Dreams Trucking and Dealers]</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RedWheel Rental. All rights reserved.</p>
+  </footer>
+</body>
+</html>
