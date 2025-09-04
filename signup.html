@@ -2,36 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="style.css">
+  <title>RedWheel Rentals - Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #f30514;
+      margin-bottom: 20px;
+    }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .form-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      background: #f30514;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #f30514;
+    }
+  </style>
 </head>
-<header>
-    <div class="logo">RedWheel Rentals</div>
-    <nav>
-      <ul>
-         <li><a href="index.html">home</a></li>
-        <li><a href="#cars">View Cars</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="login.html">Login</a></li>
-        
-
-      </ul>
-    </nav>
-  </header>
 <body>
   <div class="form-container">
     <h2>Create Your Account</h2>
-    <form>
-      <input type="text" placeholder="First Name" required />
-      <input type="text" placeholder="Last Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="tel" placeholder="Phone Number" required />
-      <input type="password" placeholder="Password" required />
-      <input type="password" placeholder="Confirm Password" required />
-      <button type="submit">Sign Up</button>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+    <form id="signupForm">
+      
+      <!-- Step 1 -->
+      <div class="form-step active">
+        <input type="text" id="firstName" placeholder="First Name" required>
+        <input type="text" id="lastName" placeholder="Last Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <input type="text" id="license" placeholder="License Number" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      </div>
+      
+      <!-- Step 2 -->
+      <div class="form-step">
+        <label for="gender">Gender</label>
+        <select id="gender" required>
+          <option value="">--Select Gender--</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" placeholder="Enter your age" required>
+
+        <label for="address">Address</label>
+        <textarea id="address" rows="3" placeholder="Enter your address" required></textarea>
+
+        <label for="expiry">License Expiry Date</label>
+        <input type="date" id="expiry" required>
+      </div>
+
+      <!-- Navigation -->
+      <div class="form-navigation">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
     </form>
   </div>
+
+  <script>
+    let currentStep = 0;
+    const steps = document.querySelectorAll(".form-step");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const form = document.getElementById("signupForm");
+
+    function showStep(step) {
+      steps.forEach((s, i) => s.classList.toggle("active", i === step));
+      prevBtn.style.display = step === 0 ? "none" : "inline-block";
+      nextBtn.textContent = step === steps.length - 1 ? "Submit" : "Next";
+    }
+
+    function nextPrev(n) {
+      currentStep += n;
+      if (currentStep >= steps.length) {
+        saveUserData();
+        return;
+      }
+      showStep(currentStep);
+    }
+
+    // Save user info in localStorage and redirect
+    function saveUserData() {
+      const user = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        license: document.getElementById("license").value,
+        gender: document.getElementById("gender").value,
+        age: document.getElementById("age").value,
+        address: document.getElementById("address").value,
+        expiry: document.getElementById("expiry").value
+      };
+
+      // Save login state
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+      // Redirect to homepage/dashboard
+      window.location.href = "index.html"; 
+    }
+
+    showStep(currentStep);
+  </script>
 </body>
 </html>
