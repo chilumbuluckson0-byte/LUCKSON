@@ -48,9 +48,55 @@
     button:hover {
       background: #f30514;
     }
+    header {
+  background-color: #343232;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+    footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #222;
+  color: white;
+  margin-top: 40px;
+}
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo">RedWheel Rentals</div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="form-container">
     <h2>Create Your Account</h2>
     <form id="signupForm">
@@ -93,6 +139,9 @@
       </div>
     </form>
   </div>
+    <footer>
+    <p>&copy; 2025 RedWheel Rental. All rights reserved.</p>
+  </footer>
 
   <script>
     let currentStep = 0;
