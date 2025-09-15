@@ -46,40 +46,34 @@
       cursor: pointer;
     }
     button:hover {
-      background: #f30514;
+      background: #c20410;
     }
     header {
-  background-color: #343232;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
-  align-items: center;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
+      background-color: #343232;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      align-items: center;
+    }
+    .logo { font-size: 24px; font-weight: bold; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
     footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #222;
-  color: white;
-  margin-top: 40px;
-}
+      text-align: center;
+      padding: 20px;
+      background-color: #222;
+      color: white;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -139,7 +133,8 @@ nav ul li a {
       </div>
     </form>
   </div>
-    <footer>
+
+  <footer>
     <p>&copy; 2025 RedWheel Rental. All rights reserved.</p>
   </footer>
 
@@ -157,6 +152,25 @@ nav ul li a {
     }
 
     function nextPrev(n) {
+      // Step validation
+      const inputs = steps[currentStep].querySelectorAll("input, select, textarea");
+      for (let input of inputs) {
+        if (!input.checkValidity() || input.value.trim() === "") {
+          alert("Please fill in all required fields before continuing.");
+          return;
+        }
+      }
+
+      // Special check for password match on step 1
+      if (currentStep === 0) {
+        let pass = document.getElementById("password").value;
+        let confirmPass = document.getElementById("confirmPassword").value;
+        if (pass !== confirmPass) {
+          alert("Passwords do not match!");
+          return;
+        }
+      }
+
       currentStep += n;
       if (currentStep >= steps.length) {
         saveUserData();
@@ -179,10 +193,9 @@ nav ul li a {
         expiry: document.getElementById("expiry").value
       };
 
-      // Save login state
       localStorage.setItem("loggedInUser", JSON.stringify(user));
 
-      // Redirect to homepage/dashboard
+      alert("Account created successfully! 🎉");
       window.location.href = "index.html"; 
     }
 
