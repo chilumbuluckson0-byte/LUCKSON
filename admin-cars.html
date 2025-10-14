@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Cars | RedWheel Admin</title>
+  <style>
+    /* ====== General Layout ====== */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #222;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      color: #ff1a1a;
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 10px 0;
+    }
+
+    .sidebar ul li a,
+    .sidebar ul li {
+      color: white;
+      text-decoration: none;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #444;
+      border-radius: 6px;
+      padding-left: 10px;
+    }
+
+    .sidebar ul li.active {
+      background-color: #b40000;
+      border-radius: 6px;
+      padding-left: 10px;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    header h1 {
+      color: #b40000;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    /* ====== Add Car Form ====== */
+    .add-car-section {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .add-car-section h2 {
+      color: #b40000;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button[type="submit"] {
+      background-color: #b40000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #ff1a1a;
+    }
+
+    /* ====== Car Table ====== */
+    .table-section {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .table-section h2 {
+      color: #b40000;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .status {
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    .status.confirmed {
+      background-color: #c6f6d5;
+      color: #006400;
+    }
+
+    .status.pending {
+      background-color: #ffe5b4;
+      color: #8b4500;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>RedWheel Admin</h2>
+    <ul>
+      <li><a href="admindash.html">🏠 Dashboard</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li class="active">🚗 Manage Cars</li>
+      <li><a href="#">👥 Customers</a></li>
+      <li><a href="#">📅 Bookings</a></li>
+      <li><a href="#">💳 Payments</a></li>
+      <li><a href="#">📊 Reports</a></li>
+      <li><a href="#">⚙️ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header>
+      <h1>Manage Cars</h1>
+      <p>Add, edit, or remove cars in your fleet.</p>
+    </header>
+
+    <!-- Add New Car Form -->
+    <section class="add-car-section">
+      <h2>Add a New Car</h2>
+      <form id="carForm">
+        <div class="form-group">
+          <label for="carName">Car Name</label>
+          <input type="text" id="carName" placeholder="e.g. Toyota Corolla" required>
+        </div>
+
+        <div class="form-group">
+          <label for="carModel">Model</label>
+          <input type="text" id="carModel" placeholder="e.g. 2022" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fuelType">Fuel Type</label>
+          <select id="fuelType" required>
+            <option value="">Select Fuel Type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="transmission">Transmission</label>
+          <select id="transmission" required>
+            <option value="">Select Transmission</option>
+            <option value="Automatic">Automatic</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price per Day (ZMW)</label>
+          <input type="number" id="price" placeholder="e.g. 700" required>
+        </div>
+
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <select id="availability" required>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+
+        <button type="submit">Add Car</button>
+      </form>
+    </section>
+
+    <!-- Car List -->
+    <section class="table-section">
+      <h2>Existing Cars</h2>
+      <table id="carTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Car Name</th>
+            <th>Model</th>
+            <th>Fuel</th>
+            <th>Transmission</th>
+            <th>Price (ZMW)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#1</td>
+            <td>Toyota Corolla</td>
+            <td>2022</td>
+            <td>Petrol</td>
+            <td>Automatic</td>
+            <td>700</td>
+            <td><span class="status confirmed">Available</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- JavaScript to Handle Car Addition -->
+  <script>
+    document.getElementById('carForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('carName').value.trim();
+      const model = document.getElementById('carModel').value.trim();
+      const fuel = document.getElementById('fuelType').value;
+      const transmission = document.getElementById('transmission').value;
+      const price = document.getElementById('price').value.trim();
+      const availability = document.getElementById('availability').value;
+
+      if (!name || !model || !fuel || !transmission || !price || !availability) {
+        alert("⚠️ Please fill in all fields.");
+        return;
+      }
+
+      const table = document.getElementById('carTable').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      const id = table.rows.length;
+
+      newRow.innerHTML = `
+        <td>#${id}</td>
+        <td>${name}</td>
+        <td>${model}</td>
+        <td>${fuel}</td>
+        <td>${transmission}</td>
+        <td>${price}</td>
+        <td><span class="status ${availability === 'Available' ? 'confirmed' : 'pending'}">${availability}</span></td>
+      `;
+
+      document.getElementById('carForm').reset();
+    });
+  </script>
+
+</body>
+</html>
