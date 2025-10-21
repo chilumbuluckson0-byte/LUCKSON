@@ -1,9 +1,14 @@
+<?php
+// index.php - only minimal PHP added: current page detection and dynamic year
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>RedWheel Rentals</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     /* ===== Reset & Global Styles ===== */
     * {
@@ -258,12 +263,15 @@
     <div class="logo">RedWheel Rentals</div>
     <nav>
       <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="signup.html">Sign Up</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a href="index.php" class="<?= $currentPage === 'index.php' ? 'active' : '' ?>">Home</a></li>
+        <li><a href="about.php" class="<?= $currentPage === 'about.php' ? 'active' : '' ?>">About</a></li>
+        <li><a href="cars.php" class="<?= $currentPage === 'cars.php' ? 'active' : '' ?>">Cars</a></li>
+        <li><a href="services.html" class="<?= $currentPage === 'services.html' ? 'active' : '' ?>">Services</a></li>
+        <li><a href="contact.php" class="<?= $currentPage === 'contact.php' ? 'active' : '' ?>">Contact</a></li>
+        <li><a href="dashboard.php" class="<?= $currentPage === 'dashboard.php' ? 'active' : '' ?>">profile</a></li>
+        <li><a href="bookings.php" class="<?= $currentPage === 'bookings.php' ? 'active' : '' ?>">Booking</a></li>
+        <li><a href="signup.php" class="<?= $currentPage === 'signup.php' ? 'active' : '' ?>">Sign Up</a></li>
+        <li><a href="login.php" class="<?= $currentPage === 'login.php' ? 'active' : '' ?>">Login</a></li>
       </ul>
     </nav>
   </header>
@@ -274,30 +282,40 @@
     <p>✨ Comfort. Style. Reliability. All in one ride. ✨</p>
   </section>
 
-  <!-- ===== Cars ===== -->
-  <section class="car-section">
-    <h2>Available Cars</h2>
-    <div class="car-list">
-      <div class="car-card">
-        <img src="image/toyota corola.jpg" alt="Toyota Corolla">
-        <h3>Toyota Corolla</h3>
-        <p>$50/day</p>
+ <!-- ===== Cars ===== -->
+<section class="car-section">
+  <h2>Available Cars</h2>
+  <div class="car-list">
+
+    <div class="car-card">
+      <img src="image/toyota corola.jpg" alt="Toyota Corolla">
+      <h3>Toyota Corolla</h3>
+      <p>$50/day</p>
+      <a href="bookings.php?car=Toyota%20Corolla" class="book-link">
         <button>Book Now</button>
-      </div>
-      <div class="car-card">
-        <img src="image/honda civc.jpg" alt="Honda Civic">
-        <h3>Honda Civic</h3>
-        <p>$60/day</p>
-        <button>Book Now</button>
-      </div>
-      <div class="car-card">
-        <img src="image/x5.jpg" alt="BMW X5">
-        <h3>BMW X5</h3>
-        <p>$120/day</p>
-        <button>Book Now</button>
-      </div>
+      </a>
     </div>
-  </section>
+
+    <div class="car-card">
+      <img src="image/honda civc.jpg" alt="Honda Civic">
+      <h3>Honda Civic</h3>
+      <p>$60/day</p>
+      <a href="bookings.php?car=Honda%20Civic" class="book-link">
+        <button>Book Now</button>
+      </a>
+    </div>
+
+    <div class="car-card">
+      <img src="image/x5.jpg" alt="BMW X5">
+      <h3>BMW X5</h3>
+      <p>$120/day</p>
+      <a href="bookings.php?car=BMW%20X5" class="book-link">
+        <button>Book Now</button>
+      </a>
+    </div>
+
+  </div>
+</section>
 
   <!-- ===== Special Offer ===== -->
   <section class="special-offer">
@@ -374,7 +392,7 @@
 
   <!-- ===== Footer ===== -->
   <footer>
-    <p>&copy; 2025 RedWheel Rentals. All rights reserved. 🚗💨</p>
+    <p>&copy; <?= date('Y') ?> RedWheel Rentals. All rights reserved. 🚗💨</p>
     <p>✨ "Your journey, our wheels." ✨</p>
   </footer>
 

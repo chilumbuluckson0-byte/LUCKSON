@@ -1,3 +1,8 @@
+<?php
+session_start();
+include 'db_connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,9 +85,9 @@
     <div class="logo">RedWheel Rental</div>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="cars.html">Cars</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="cars.php">Cars</a></li>
+        <li><a href="about.php" class="active">About</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li id="loginLink"><a href="login.html">Login</a></li>

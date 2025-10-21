@@ -234,6 +234,10 @@
             <option value="Unavailable">Unavailable</option>
           </select>
         </div>
+        <input type="hidden" id="car_id" name="id">
+        
+
+
 
         <button type="submit">Add Car</button>
       </form>
@@ -265,44 +269,101 @@
             <td><span class="status confirmed">Available</span></td>
           </tr>
         </tbody>
+        <table id="carTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Car Name</th>
+      <th>Model</th>
+      <th>Fuel Type</th>
+      <th>Transmission</th>
+      <th>Price/Day</th>
+      <th>Availability</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
       </table>
     </section>
   </div>
-
-  <!-- JavaScript to Handle Car Addition -->
-  <script>
-    document.getElementById('carForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('carName').value.trim();
-      const model = document.getElementById('carModel').value.trim();
-      const fuel = document.getElementById('fuelType').value;
-      const transmission = document.getElementById('transmission').value;
-      const price = document.getElementById('price').value.trim();
-      const availability = document.getElementById('availability').value;
-
-      if (!name || !model || !fuel || !transmission || !price || !availability) {
-        alert("⚠️ Please fill in all fields.");
-        return;
-      }
-
-      const table = document.getElementById('carTable').getElementsByTagName('tbody')[0];
-      const newRow = table.insertRow();
-      const id = table.rows.length;
-
-      newRow.innerHTML = `
-        <td>#${id}</td>
-        <td>${name}</td>
-        <td>${model}</td>
-        <td>${fuel}</td>
-        <td>${transmission}</td>
-        <td>${price}</td>
-        <td><span class="status ${availability === 'Available' ? 'confirmed' : 'pending'}">${availability}</span></td>
+<script>
+  async function loadCars() {
+    const response = await fetch('load_cars.php');
+    const cars = await response.json();
+    const tbody = document.querySelector('#carTable tbody');
+    tbody.innerHTML = "";
+    cars.forEach((car, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>#${index + 1}</td>
+        <td>${car.car_name}</td>
+        <td>${car.model}</td>
+        <td>${car.fuel_type}</td>
+        <td>${car.transmission}</td>
+        <td>${car.price_per_day}</td>
+        <td><span class="status ${car.availability === 'Available' ? 'confirmed' : 'pending'}">${car.availability}</span></td>
+        <td>
+          <button onclick="editCar(${car.id}, '${car.car_name}', '${car.model}', '${car.fuel_type}', '${car.transmission}', '${car.price_per_day}', '${car.availability}')">Edit</button>
+          <button onclick="deleteCar(${car.id})" style="background:red;color:white;">Delete</button>
+        </td>
       `;
-
-      document.getElementById('carForm').reset();
+      tbody.appendChild(row);
     });
-  </script>
+  }
+
+  async function deleteCar(id) {
+    if (confirm("Are you sure you want to delete this car?")) {
+      const formData = new FormData();
+      formData.append("id", id);
+
+      const res = await fetch("delete_car.php", { method: "POST", body: formData });
+      const result = await res.text();
+      if (result.trim() === "success") {
+        alert("Car deleted successfully!");
+        loadCars();
+      } else {
+        alert("Error deleting car.");
+      }
+    }
+  }
+
+  function editCar(id, name, model, fuel, trans, price, avail) {
+    document.getElementById("car_id").value = id;
+    document.getElementById("car_name").value = name;
+    document.getElementById("model").value = model;
+    document.getElementById("fuel_type").value = fuel;
+    document.getElementById("transmission").value = trans;
+    document.getElementById("price").value = price;
+    document.getElementById("availability").value = avail;
+    document.getElementById("submitBtn").innerText = "Update Car";
+  }
+
+  document.getElementById("carForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const id = formData.get("id");
+    const file = id ? "update_car.php" : "add_car.php";
+
+    const res = await fetch(file, { method: "POST", body: formData });
+    const result = await res.text();
+
+    if (result.trim() === "success") {
+      alert(id ? "Car updated successfully!" : "Car added successfully!");
+      this.reset();
+      document.getElementById("submitBtn").innerText = "Add Car";
+      loadCars();
+    } else {
+      alert("Error saving data.");
+    }
+  });
+
+  loadCars();
+</script>
+
+ 
+
 
 </body>
 </html>
