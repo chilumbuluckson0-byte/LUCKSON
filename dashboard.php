@@ -10,13 +10,23 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
 
 $user_id = $_SESSION['id'];
 
-// Fetch user info from the database
-$query = "SELECT first_name, last_name, email, phone, address FROM user_table WHERE id = ?";
+// Fetch user info (for users only)
+$query = "SELECT first_name, last_name, email, phone_number, address 
+          FROM users 
+          WHERE id = ? AND role = 'user'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+// If somehow an admin or invalid user tries to access, redirect them
+if ($result->num_rows === 0) {
+    header("Location: login.php");
+    exit();
+}
+
 $user = $result->fetch_assoc();
+
 
 // Fetch user booking history
 $bookings_query = "SELECT car_name, start_date, end_date, status FROM bookings WHERE user_id = ?";
@@ -131,7 +141,7 @@ $bookings_result = $stmt2->get_result();
       <input type="text" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required>
       <input type="text" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required>
       <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-      <input type="text" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
+      <input type="text" name="phone" value="<?php echo htmlspecialchars($user['phone_number']); ?>">
       <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>">
       <button type="submit">💾 Save Changes</button>
     </form>

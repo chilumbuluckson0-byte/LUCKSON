@@ -9,9 +9,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 }
 
 // Fetch summary stats
-$total_users = $conn->query("SELECT COUNT(*) AS total FROM user_table WHERE role='user'")->fetch_assoc()['total'];
-$total_cars = $conn->query("SELECT COUNT(*) AS total FROM car_table")->fetch_assoc()['total'];
-$total_bookings = $conn->query("SELECT COUNT(*) AS total FROM booking_table")->fetch_assoc()['total'];
+$total_users = $conn->query("SELECT COUNT(*) AS total FROM users WHERE role='user'")->fetch_assoc()['total'];
+$total_cars = $conn->query("SELECT COUNT(*) AS total FROM cars")->fetch_assoc()['total'];
+$total_bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -156,11 +156,11 @@ $total_bookings = $conn->query("SELECT COUNT(*) AS total FROM booking_table")->f
         </tr>
         <?php
         $recent = $conn->query("
-          SELECT b.id, first_name AS first_name, c.name, b.start_date, b.status
-          FROM booking_table b
-          JOIN user_table u ON b.id = u.id
-          JOIN car_table c ON b.id = c.id
-          ORDER BY b.id DESC LIMIT 5
+          SELECT b.booking_id, first_name AS first_name, c.car_name, b.start_date, b.status
+          FROM bookings b
+          JOIN users u ON b.booking_id = u.id
+          JOIN cars c ON b.booking_id = c.car_id
+          ORDER BY b.booking_id DESC LIMIT 5
         ");
         if ($recent->num_rows > 0) {
           while ($row = $recent->fetch_assoc()) {

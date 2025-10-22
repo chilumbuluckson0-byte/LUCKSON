@@ -1,5 +1,6 @@
 <?php
 session_start();
+ 
 
 // Check if user is logged in
 $isLoggedIn = isset($_SESSION['email']) && $_SESSION['role'] === 'user';
@@ -126,15 +127,18 @@ $userName = $isLoggedIn ? $_SESSION['first_name'] : '';
       <a href="index.php">Home</a>
       <a href="cars.php" class="active">Cars</a>
       <a href="about.php">About</a>
-      <a href="contact.php">Contact</a>
-      <a href="services.php">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="services.html">Services</a>
       <?php if ($isLoggedIn): ?>
-        <a href="dashboard.php">Welcome, <?php echo htmlspecialchars($userName); ?></a>
+        <a href="dashboard.php">Welcome, <?php echo htmlspecialchars($first_name); ?></a>
         <a href="logout.php">Logout</a>
       <?php else: ?>
         <a href="login.php">Login</a>
       <?php endif; ?>
     </nav>
+    
+<?php include 'auth_session.php'; ?>
+
   </header>
 
   <main>

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "Password must be at least 6 characters.";
   } else {
     // Prepare query to find user by email
-    $sql = "SELECT id, first_name, last_name, email, password, role FROM user_table WHERE email = ?";
+    $sql = "SELECT id, first_name, last_name, email, password, role FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        $_SESSION['id'] = $user['id'];
 $_SESSION['first_name'] = $user['first_name'];
 $_SESSION['last_name'] = $user['last_name'];
-$_SESSION['user_email'] = $user['email'];
+$_SESSION['user_email'] = $user['user_email'];
 $_SESSION['role'] = $user['role'];
 
         // Redirect based on user role

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "redwheel"; // ✅ Change to your actual database name
+$dbname = "redwheel"; 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

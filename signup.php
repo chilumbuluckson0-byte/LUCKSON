@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = "<p style='color:red;'>⚠️ Password must be at least 6 characters long.</p>";
   } else {
     // ✅ Check if email already exists
-    $check_email = "SELECT * FROM user_table WHERE email='$email'";
+    $check_email = "SELECT * FROM users WHERE email='$email'";
     $result = $conn->query($check_email);
 
     if ($result->num_rows > 0) {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
       // ✅ Insert into database
-      $sql = "INSERT INTO user_table (first_name, last_name, email, phone, license_no, password, role)
+      $sql = "INSERT INTO users (first_name, last_name, email, phone_number, license_no, password, role)
               VALUES ('$first_name', '$last_name', '$email', '$phone', '$license', '$hashedPassword', '$role')";
 
       if ($conn->query($sql) === TRUE) {
