@@ -1,12 +1,11 @@
 <?php
 include 'db_connect.php';
 
-$sql = "SELECT * FROM cars";
-$result = $conn->query($sql);
-
+$result = $conn->query("SELECT * FROM cars ORDER BY id DESC");
 $cars = [];
+
 while ($row = $result->fetch_assoc()) {
-  $cars[] = $row;
+    $cars[] = $row;
 }
 
 echo json_encode($cars);

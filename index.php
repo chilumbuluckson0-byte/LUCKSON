@@ -267,7 +267,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li><a href="about.php" class="<?= $currentPage === 'about.php' ? 'active' : '' ?>">About</a></li>
         <li><a href="cars.php" class="<?= $currentPage === 'cars.php' ? 'active' : '' ?>">Cars</a></li>
         <li><a href="services.html" class="<?= $currentPage === 'services.html' ? 'active' : '' ?>">Services</a></li>
-        <li><a href="contact.php" class="<?= $currentPage === 'contact.php' ? 'active' : '' ?>">Contact</a></li>
+        <li><a href="contact.html" class="<?= $currentPage === 'contact.html' ? 'active' : '' ?>">Contact</a></li>
         <li><a href="dashboard.php" class="<?= $currentPage === 'dashboard.php' ? 'active' : '' ?>">profile</a></li>
         <li><a href="bookings.php" class="<?= $currentPage === 'bookings.php' ? 'active' : '' ?>">Booking</a></li>
         <li><a href="signup.php" class="<?= $currentPage === 'signup.php' ? 'active' : '' ?>">Sign Up</a></li>

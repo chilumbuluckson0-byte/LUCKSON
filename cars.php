@@ -126,6 +126,7 @@ $userName = $isLoggedIn ? $_SESSION['first_name'] : '';
     <nav>
       <a href="index.php">Home</a>
       <a href="cars.php" class="active">Cars</a>
+      <a href="bookings.php">Booking</a>
       <a href="about.php">About</a>
       <a href="contact.html">Contact</a>
       <a href="services.html">Services</a>

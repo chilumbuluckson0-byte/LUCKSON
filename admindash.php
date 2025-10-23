@@ -8,6 +8,16 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   exit();
 }
 
+// Handle booking status update (Approve or Decline)
+if (isset($_POST['update_status'])) {
+    $booking_id = $_POST['booking_id'];
+    $new_status = $_POST['new_status'];
+    $stmt = $conn->prepare("UPDATE bookings SET status = ? WHERE booking_id = ?");
+    $stmt->bind_param("si", $new_status, $booking_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
 // Fetch summary stats
 $total_users = $conn->query("SELECT COUNT(*) AS total FROM users WHERE role='user'")->fetch_assoc()['total'];
 $total_cars = $conn->query("SELECT COUNT(*) AS total FROM cars")->fetch_assoc()['total'];
@@ -108,6 +118,17 @@ $total_bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_
       background-color: #f30514;
       color: white;
     }
+    .action-btn {
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+    .approve-btn { background-color: #28a745; }
+    .decline-btn { background-color: #dc3545; }
+    .approve-btn:hover { background-color: #218838; }
+    .decline-btn:hover { background-color: #c82333; }
   </style>
 </head>
 <body>
@@ -118,6 +139,7 @@ $total_bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_
     <a href="manage_cars.php">🚗 Manage Cars</a>
     <a href="manage_users.php">👥 Manage Users</a>
     <a href="manage_bookings.php">📅 Manage Bookings</a>
+    <a href="admin-car.html">🚗 Manage Cars</a>
     <a href="logout.php">🚪 Logout</a>
   </div>
 
@@ -151,29 +173,54 @@ $total_bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_
           <th>ID</th>
           <th>User</th>
           <th>Car</th>
-          <th>Date</th>
+          <th>Start Date</th>
+          <th>End Date</th>
           <th>Status</th>
+          <th>Actions</th>
         </tr>
+
         <?php
         $recent = $conn->query("
-          SELECT b.booking_id, first_name AS first_name, c.car_name, b.start_date, b.status
+          SELECT b.booking_id, u.first_name, u.last_name, c.car_name, b.start_date, b.end_date, b.status
           FROM bookings b
-          JOIN users u ON b.booking_id = u.id
-          JOIN cars c ON b.booking_id = c.car_id
-          ORDER BY b.booking_id DESC LIMIT 5
+          JOIN users u ON b.user_email = u.email
+          JOIN cars c ON b.car_name = c.car_name
+          ORDER BY b.booking_id DESC
+          LIMIT 10
         ");
-        if ($recent->num_rows > 0) {
+
+        if ($recent && $recent->num_rows > 0) {
           while ($row = $recent->fetch_assoc()) {
-            echo "<tr>
-              <td>{$row['id']}</td>
-              <td>{$row['user_name']}</td>
+            echo "
+            <tr>
+              <td>{$row['booking_id']}</td>
+              <td>{$row['first_name']} {$row['last_name']}</td>
               <td>{$row['car_name']}</td>
-              <td>{$row['booking_date']}</td>
+              <td>{$row['start_date']}</td>
+              <td>{$row['end_date']}</td>
               <td>{$row['status']}</td>
-            </tr>";
+              <td>";
+              
+              if ($row['status'] == 'Pending') {
+                echo "
+                <form method='POST' style='display:inline;'>
+                  <input type='hidden' name='booking_id' value='{$row['booking_id']}'>
+                  <input type='hidden' name='new_status' value='Approved'>
+                  <button type='submit' name='update_status' class='action-btn approve-btn'>Approve</button>
+                </form>
+                <form method='POST' style='display:inline;'>
+                  <input type='hidden' name='booking_id' value='{$row['booking_id']}'>
+                  <input type='hidden' name='new_status' value='Declined'>
+                  <button type='submit' name='update_status' class='action-btn decline-btn'>Decline</button>
+                </form>";
+              } else {
+                echo "<span style='color:gray;'>No actions</span>";
+              }
+
+              echo "</td></tr>";
           }
         } else {
-          echo "<tr><td colspan='5'>No recent bookings.</td></tr>";
+          echo "<tr><td colspan='7'>No recent bookings found.</td></tr>";
         }
         ?>
       </table>

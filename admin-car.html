@@ -170,8 +170,8 @@
   <div class="sidebar">
     <h2>RedWheel Admin</h2>
     <ul>
-      <li><a href="admindash.html">🏠 Dashboard</a></li>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="admindash.php">🏠 Dashboard</a></li>
+      <li><a href="index.php">Home</a></li>
       <li class="active">🚗 Manage Cars</li>
       <li><a href="#">👥 Customers</a></li>
       <li><a href="#">📅 Bookings</a></li>
@@ -318,7 +318,7 @@
       const formData = new FormData();
       formData.append("id", id);
 
-      const res = await fetch("delete_car.php", { method: "POST", body: formData });
+      const res = await fetch("delete_cars.php", { method: "POST", body: formData });
       const result = await res.text();
       if (result.trim() === "success") {
         alert("Car deleted successfully!");

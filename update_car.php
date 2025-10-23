@@ -1,30 +1,23 @@
 <?php
-include 'db.php';
+include 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $id           = $_POST['id'];
-  $car_name     = $_POST['car_name'];
-  $model        = $_POST['model'];
-  $fuel_type    = $_POST['fuel_type'];
-  $transmission = $_POST['transmission'];
-  $price        = $_POST['price'];
-  $availability = $_POST['availability'];
+$id = $_POST['id'];
+$car_name = $_POST['car_name'];
+$model = $_POST['model'];
+$fuel_type = $_POST['fuel_type'];
+$transmission = $_POST['transmission'];
+$total_price = $_POST['tatol_price'];
+$new_status = $_POST['status'];
 
-  $sql = "UPDATE cars SET 
-            car_name='$car_name', 
-            model='$model', 
-            fuel_type='$fuel_type', 
-            transmission='$transmission', 
-            price_per_day='$price',
-            availability='$availability'
-          WHERE id=$id";
+$stmt = $conn->prepare("UPDATE cars SET car_name=?, model=?, fuel_type=?, transmission=?, price_per_day=?, availability=? WHERE id=?");
+$stmt->bind_param("ssssdsi", $car_name, $model, $fuel_type, $transmission, $price_per_day, $availability, $id);
 
-  if ($conn->query($sql) === TRUE) {
+if ($stmt->execute()) {
     echo "success";
-  } else {
+} else {
     echo "error";
-  }
 }
 
+$stmt->close();
 $conn->close();
 ?>
